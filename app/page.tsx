@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import BottomNav from "./components/BottomNav";
+import LanguageSwitcher from "./components/LanguageSwitcher";
 import { useT } from "./lib/i18n";
 
 // key: default reminder ka number (language ke hisaab se badalta hai)
@@ -77,7 +78,8 @@ export default function Home() {
 
   return (
     <main className="relative mx-auto min-h-screen w-full max-w-[390px] bg-surface px-6 pb-28 pt-4">
-      <div className="flex justify-end">
+      <div className="flex items-center justify-between">
+        <LanguageSwitcher />
         <a
           href="tel:108"
           className="rounded-full bg-danger px-4 py-2 text-xs font-semibold text-white"
@@ -161,7 +163,8 @@ export default function Home() {
           value={newText}
           onChange={(e) => setNewText(e.target.value)}
           placeholder={t.reminderPlaceholder}
-className="min-w-0 flex-1 rounded-full bg-white px-4 py-3 text-sm text-ink shadow-md outline-none placeholder:text-muted"        />
+          className="min-w-0 flex-1 rounded-full bg-white px-4 py-3 text-sm text-ink shadow-md outline-none placeholder:text-muted"
+        />
         <button
           type="submit"
           className="shrink-0 rounded-full bg-primary px-5 text-sm font-semibold text-white"

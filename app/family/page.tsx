@@ -2,6 +2,8 @@
 
 import { useEffect, useState } from "react";
 import BottomNav from "../components/BottomNav";
+import LanguageSwitcher from "../components/LanguageSwitcher";
+import { useT } from "../lib/i18n";
 
 type Member = { id: number; name: string; relation: string; score: number };
 
@@ -20,6 +22,7 @@ function scoreColor(score: number) {
 }
 
 export default function FamilyPage() {
+  const { t } = useT();
   const [members, setMembers] = useState<Member[]>(starter);
   const [loaded, setLoaded] = useState(false);
   const [name, setName] = useState("");
@@ -59,16 +62,17 @@ export default function FamilyPage() {
 
   return (
     <main className="relative mx-auto min-h-dvh w-full max-w-[390px] bg-surface px-6 pb-28 pt-4">
-      <div className="flex justify-end">
+      <div className="flex items-center justify-between">
+        <LanguageSwitcher />
         <a
           href="tel:108"
           className="rounded-full bg-danger px-4 py-2 text-xs font-semibold text-white"
         >
-          Emergency 108
+          {t.emergency}
         </a>
       </div>
 
-      <h1 className="mt-3 text-2xl font-bold text-ink">Family</h1>
+      <h1 className="mt-3 text-2xl font-bold text-ink">{t.navFamily}</h1>
       <p className="text-sm text-muted">Parivar ki sehat ek jagah</p>
 
       <ul className="mt-6 space-y-3">

@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import BottomNav from "../components/BottomNav";
+import LanguageSwitcher from "../components/LanguageSwitcher";
 import { useT } from "../lib/i18n";
 
 type Message = { id: number; role: "ai" | "user"; text: string };
@@ -113,13 +114,7 @@ export default function ChatPage() {
     <main className="relative mx-auto flex h-dvh w-full max-w-[390px] flex-col bg-surface">
       <header className="px-6 pt-4">
         <div className="flex items-center justify-between">
-          {messages.length > 0 ? (
-            <button onClick={clearChat} className="text-xs font-semibold text-muted">
-              🗑 {clearLabel}
-            </button>
-          ) : (
-            <span />
-          )}
+          <LanguageSwitcher />
           <a
             href="tel:108"
             className="rounded-full bg-danger px-4 py-2 text-xs font-semibold text-white"
@@ -128,7 +123,14 @@ export default function ChatPage() {
           </a>
         </div>
         <h1 className="mt-3 text-2xl font-bold text-ink">{t.chatTitle}</h1>
-        <p className="text-sm text-muted">{t.chatSubtitle}</p>
+        <div className="flex items-center justify-between">
+          <p className="text-sm text-muted">{t.chatSubtitle}</p>
+          {messages.length > 0 && (
+            <button onClick={clearChat} className="text-xs font-semibold text-muted">
+              🗑 {clearLabel}
+            </button>
+          )}
+        </div>
       </header>
 
       <div className="mt-4 flex-1 space-y-3 overflow-y-auto px-6">

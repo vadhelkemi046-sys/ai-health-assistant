@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import BottomNav from "../components/BottomNav";
+import LanguageSwitcher from "../components/LanguageSwitcher";
 import { useT } from "../lib/i18n";
 
 export default function ReportsPage() {
@@ -19,9 +20,9 @@ export default function ReportsPage() {
     pick: lang === "gu" ? "ફોટો અથવા ફાઇલ પસંદ કરો" : lang === "en" ? "Choose photo or file" : "फोटो या फाइल चुनें",
     wait: lang === "gu" ? "રિપોર્ટ વાંચી રહ્યો છું..." : lang === "en" ? "Reading your report..." : "रिपोर्ट पढ़ रहा हूँ...",
     note:
-      lang === "gu" ? "આ ફક્ત માર્ગદર્શન છે, ડૉક્ટરની સલાહ નથી. ટેસ્ટ માટે અસલી રિપોર્ટ અપલોડ ન કરો."
-      : lang === "en" ? "This is only guidance, not a doctor's advice. Do not upload real reports while testing."
-      : "ये सिर्फ़ मार्गदर्शन है, डॉक्टर की सलाह नहीं। टेस्ट के लिए असली रिपोर्ट अपलोड न करें।",
+      lang === "gu" ? "આ ફક્ત માર્ગદર્શન છે, ડૉક્ટરની સલાહ નથી. AI વાંચવામાં ભૂલ કરી શકે છે, અસલી રિપોર્ટ ડૉક્ટરને બતાવો. ટેસ્ટ માટે અસલી રિપોર્ટ અપલોડ ન કરો."
+      : lang === "en" ? "This is only guidance, not a doctor's advice. The AI can misread values, so show the original report to a doctor. Do not upload real reports while testing."
+      : "ये सिर्फ़ मार्गदर्शन है, डॉक्टर की सलाह नहीं। AI वैल्यू पढ़ने में गलती कर सकता है, असली रिपोर्ट डॉक्टर को दिखाएँ। टेस्ट के लिए असली रिपोर्ट अपलोड न करें।",
   };
 
   async function onPick(e: React.ChangeEvent<HTMLInputElement>) {
@@ -47,7 +48,8 @@ export default function ReportsPage() {
 
   return (
     <main className="relative mx-auto min-h-dvh w-full max-w-[390px] bg-surface px-6 pb-28 pt-4">
-      <div className="flex justify-end">
+      <div className="flex items-center justify-between">
+        <LanguageSwitcher />
         <a href="tel:108" className="rounded-full bg-danger px-4 py-2 text-xs font-semibold text-white">
           {t.emergency}
         </a>
