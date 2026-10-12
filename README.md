@@ -1,36 +1,73 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# AI Health Assistant
 
-## Getting Started
+A mobile-first, multilingual health guidance web app for ordinary families in India. Users can chat with an AI in **Gujarati, Hindi, Hinglish or English**, get simple explanations of lab reports from a photo, track daily health reminders, and keep an eye on family members' health scores in one place.
 
-First, run the development server:
+**Live demo:** https://ai-health-assistant-drab.vercel.app
+
+> **Disclaimer:** This app gives general guidance only. It is not a doctor and does not replace medical advice. Please do not upload real medical reports to the demo.
+
+## Features
+
+- **AI chat in 3 languages.** Replies in the same language and script the user writes in (Gujarati, Hindi in Devanagari, Hinglish in Roman letters, or English). Voice input is supported through the browser's speech recognition.
+- **Safety-first answers.** Emergency symptoms (such as chest pain) start with "call 108"; the assistant never gives a diagnosis or medicine doses; self-harm messages get a warm reply with the Tele-MANAS helpline (14416).
+- **Report reader.** Upload a photo of a blood test report and get a short, plain-language summary that compares each value with the reference range printed on the report.
+- **Daily reminders and health score.** Add, tick off and remove reminders; the score updates with the day's progress and resets every day.
+- **Family dashboard.** Add family members and see their scores at a glance.
+- **One-tap language switcher** (ગુજરાતી / हिंदी / English) on every page, so no technical knowledge is needed.
+- **Saved locally.** Chat history, reminders and family list are stored in the browser (`localStorage`); nothing is stored on a server.
+
+## Tech stack
+
+- Next.js (App Router) and React with TypeScript
+- Tailwind CSS
+- Google Gemini API (text and image understanding) called from Next.js API routes
+- Web Speech API for voice input
+- Deployed on Vercel
+
+
+## Run it locally
+
+```bash
+git clone https://github.com/vadhelkemi046-sys/ai-health-assistant.git
+cd ai-health-assistant
+npm install
+```
+
+Create a file named `.env.local` in the project root:
+
+```
+GEMINI_API_KEY=your_api_key_here
+```
+
+Then start the app:
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open http://localhost:3000.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Project structure
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```
+app/
+  page.tsx            Home: health score and reminders
+  chat/page.tsx       AI chat
+  reports/page.tsx    Report upload and summary
+  family/page.tsx     Family members
+  api/chat/route.ts   Chat API (system prompt, language and safety rules)
+  api/report/route.ts Report reading API
+  components/         BottomNav, LanguageSwitcher
+  lib/i18n.ts         Gujarati, Hindi and English texts
+```
 
-## Learn More
+## Roadmap
 
-To learn more about Next.js, take a look at the following resources:
+- Login and a database so data syncs across devices
+- Use report values in the health score
+- Reminder notifications (PWA)
+- PDF report support
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Author
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Vadhel Kemi
